@@ -10,3 +10,9 @@ C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStart
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Client\obj\Debug\Client.exe
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Client\obj\Debug\Client.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Debug\Client.exe.config
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Debug\Client.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Debug\Client.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Debug\Client.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Debug\Client.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache

@@ -16,7 +16,7 @@ namespace Server
         TcpListener server;
         public Server()
         {
-            server = new TcpListener(IPAddress.Parse("192.168.0.144"),9999);
+            server = new TcpListener(IPAddress.Parse("192.168.0.152"),9999);
             server.Start();
         }
         public void Run()
@@ -35,7 +35,7 @@ namespace Server
         }
         private void Respond(string body)
         {
-             client.Send(body);
+           
         }
     }
 }
