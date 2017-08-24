@@ -15,14 +15,19 @@ namespace Client
         public Client(string IP, int port)
         {
             clientSocket = new TcpClient();
-            clientSocket.Connect(IPAddress.Parse("192.168.0.152"), 9999);
+            clientSocket.Connect(IPAddress.Parse("127.0.0.1"), 9999);
             stream = clientSocket.GetStream();
+            
         }
         public void Send()
         {
-            string messageString = UI.GetInput();
-            byte[] message = Encoding.ASCII.GetBytes(messageString);
-            stream.Write(message, 0, message.Count());
+            while(true)
+            {
+                string messageString = UI.GetInput();
+                byte[] message = Encoding.ASCII.GetBytes(messageString);
+                stream.Write(message, 0, message.Count());
+            }
+
         }
         public void Recieve()
         {
@@ -32,6 +37,11 @@ namespace Client
                 stream.Read(recievedMessage, 0, recievedMessage.Length);
                 UI.DisplayMessage(Encoding.ASCII.GetString(recievedMessage));
             }
+<<<<<<< HEAD
+=======
+            
+            
+>>>>>>> ca128099f06fdafb09e41891097494e5fc142f6d
         }
             
     }
