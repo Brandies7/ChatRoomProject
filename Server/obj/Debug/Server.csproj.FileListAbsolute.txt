@@ -18,6 +18,12 @@ C:\Users\adanb\Downloads\ChatroomStarter\ChatroomStarter\ChatroomStarter\Chatroo
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\bin\Debug\Server.exe.config
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\obj\Debug\Server.exe
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\obj\Debug\Server.pdb
+<<<<<<< HEAD
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\bin\Debug\Server.exe.config
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\obj\Debug\Server.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\obj\Debug\Server.pdb
+=======
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\bin\Debug\Server.exe
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\bin\Debug\Server.pdb
 C:\Users\adanb\Desktop\devCodeCamp\ChatroomStarter\ChatroomStarter\ChatroomStarter\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+>>>>>>> 3eba92d9e7751812947e90ffc52ffec80675c0f3
