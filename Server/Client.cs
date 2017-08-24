@@ -20,14 +20,24 @@ namespace Server
         }
         public void Send(string Message)
         {
+            // Convert message to binary (1s and 0s)
             byte[] message = Encoding.ASCII.GetBytes(Message);
+
+            // Send the message to the client.
             stream.Write(message, 0, message.Count());
         }
-        public string Recieve()
+        public string Receive()
         {
+            // Create a 256 byte array
             byte[] recievedMessage = new byte[256];
+
+            // Read up to 256 bytes from the input
             stream.Read(recievedMessage, 0, recievedMessage.Length);
+
+            // Convert the input as a string
             string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);
+            
+            // Write the input to the server log and then return.
             Console.WriteLine(recievedMessageString);
             return recievedMessageString;
         }
