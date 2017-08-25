@@ -1,0 +1,6 @@
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Release\Client.exe.config
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Release\Client.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\bin\Release\Client.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Release\Client.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Release\Client.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Client\obj\Release\Client.csprojResolveAssemblyReference.cache
