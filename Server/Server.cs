@@ -60,9 +60,10 @@ namespace Server
 
                 // Create a client object.
                 client = new Client(stream, clientSocket);
-                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
-                Thread receiveMessageThread = new Thread(receiveMessageStart);
-                receiveMessageThread.Start();
+
+                ThreadStart receiveMessageStart = new ThreadStart(client.Receive); // Create a thread starter that uses the client.receive function
+                Thread receiveMessageThread = new Thread(receiveMessageStart); // Create a thread that calls client.receive()
+                receiveMessageThread.Start(); // Start that thread. (We need resource locking?)
             }
         }
 
