@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class IObservable
+    public interface IObserver
     {
     }
 }

@@ -22,28 +22,27 @@ namespace Server
 
         public void Send(string Message)
         {
-<<<<<<< HEAD
+
             while (true)
             {
                 byte[] message = Encoding.ASCII.GetBytes(Message);
                 stream.Write(message, 0, message.Count());
             }
             
-=======
+
             // Convert message to binary (1s and 0s)
             byte[] message = Encoding.ASCII.GetBytes(Message);
 
             // Send the message to the client.
             stream.Write(message, 0, message.Count());
             stream.Close();
->>>>>>> 1201f550720d858c94fcba09049db11bf6bb44ca
+
         }
 
         public void Receive()
         {
             while (true)
             {
-<<<<<<< HEAD
                 byte[] recievedMessage = new byte[256];
                 stream.Read(recievedMessage, 0, recievedMessage.Length);
                 string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);
@@ -51,13 +50,13 @@ namespace Server
                 return recievedMessageString;
             }
         }
-=======
+
                 // Create a 256 byte array
                 byte[] recievedMessage = new byte[256];
 
                 // Read up to 256 bytes from the input
                 stream.Read(recievedMessage, 0, recievedMessage.Length);
->>>>>>> 1201f550720d858c94fcba09049db11bf6bb44ca
+
 
                 // Convert the input as a string
                 string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);

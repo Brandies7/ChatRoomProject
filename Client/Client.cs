@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Client
+    class Client:IObservable
     {
         TcpClient clientSocket;
         NetworkStream stream;
@@ -17,19 +17,15 @@ namespace Client
         {
             // Instantiating a TcpClient
             clientSocket = new TcpClient();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            clientSocket.Connect(IPAddress.Parse("192.168.0.152"), 9999);
-=======
+
             clientSocket.Connect(IPAddress.Parse("127.0.0.1"), 9999);
->>>>>>> 48bf7fd4c29debebf06d93105ca11f3002bca22f
-=======
+
 
             // We are connecting it to a server with IP = IP and port = port
             clientSocket.Connect(IPAddress.Parse(IP), port);
 
             // Open a stream connection between client and server.
->>>>>>> 1201f550720d858c94fcba09049db11bf6bb44ca
+
             stream = clientSocket.GetStream();
         }
 
