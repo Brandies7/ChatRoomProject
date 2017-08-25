@@ -27,27 +27,33 @@ namespace Client
 
         public void Send()
         {
-            // Get a message.
-            string messageString = UI.GetInput();
+            while (true)
+            {
+                // Get a message.
+                string messageString = UI.GetInput();
 
-            // Convert the message to bytes (1s and 0s).
-            byte[] message = Encoding.ASCII.GetBytes(messageString);
+                // Convert the message to bytes (1s and 0s).
+                byte[] message = Encoding.ASCII.GetBytes(messageString);
 
-            // Send the message over the network stream
-            stream.Write(message, 0, message.Count());
+                // Send the message over the network stream
+                stream.Write(message, 0, message.Count());
+            }
 
         }
 
-        public void Recieve()
+        public void Receive()
         {
-            // Creating a byte array with length 256.
-            byte[] recievedMessage = new byte[256];
+            while (true)
+            {
+                // Creating a byte array with length 256.
+                byte[] recievedMessage = new byte[256];
 
-            // Reads 256 bytes of any message being received.
-            stream.Read(recievedMessage, 0, recievedMessage.Length);
+                // Reads 256 bytes of any message being received.
+                stream.Read(recievedMessage, 0, recievedMessage.Length);
 
-            // Displays the message received into the console.
-            UI.DisplayMessage(Encoding.ASCII.GetString(recievedMessage));
+                // Displays the message received into the console.
+                UI.DisplayMessage(Encoding.ASCII.GetString(recievedMessage));
+            }
         }
     }
 }

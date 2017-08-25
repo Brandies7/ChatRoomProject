@@ -12,8 +12,11 @@ namespace Server
 {
     class Server
     {
-        public static List<Client> clients;
+        public static Client client;
         TcpListener server;
+        private List<ThreadStart> clientThreadStarts = new List<ThreadStart>();
+        private List<Thread> clientThreads = new List<Thread>();
+
         public Server()
         {
             // We want to listten on an address and a port.(We are listening for anything to be sent to us).
@@ -24,30 +27,43 @@ namespace Server
         }
         public void Run()
         {
-            // Continuously accept clients.
             AcceptClient();
+            // Continuously accept clients.
+            ThreadStart acceptClientStart = new ThreadStart(AcceptClient);
+            Thread acceptClientThread = new Thread(AcceptClient);
+            acceptClientThread.Start();
 
             // Continuously look for messages to receive.
-            foreach (Client client in clients)
-            {
-                string message = client.Receive();
-                if(message.Length > 0)
-                    Respond(message);
-            }
+            ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
+            Thread receiveMessageThread = new Thread(receiveMessageStart);
+            receiveMessageThread.Start();
 
-            
+
+
+
+            //            if (message.Length > 0)
+            //                Respond(message);
+
+
+
         }
         private void AcceptClient()
         {
-            // Create a client that is requesting to connect (Client called GetStream());
-            TcpClient clientSocket = server.AcceptTcpClient();
-            Console.WriteLine("Connected a new client");
+            while (true)
+            {
+                // Create a client that is requesting to connect (Client called GetStream());
+                TcpClient clientSocket = server.AcceptTcpClient();
+                Console.WriteLine("Connected a new client");
 
-            // Determine what stream the client is using
-            NetworkStream stream = clientSocket.GetStream();
+                // Determine what stream the client is using
+                NetworkStream stream = clientSocket.GetStream();
 
-            // Create a client object.
-            clients.Add(new Client(stream, clientSocket));
+                // Create a client object.
+                client = new Client(stream, clientSocket);
+                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
+                Thread receiveMessageThread = new Thread(receiveMessageStart);
+                receiveMessageThread.Start();
+            }
         }
 
         // This is probably going to be what we use to broadcast messages. 

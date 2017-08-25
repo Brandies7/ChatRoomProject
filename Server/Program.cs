@@ -12,6 +12,7 @@ namespace Server
         {
             new Server().Run();
             Console.ReadLine();
+            // while(true);
         }
     }
 }

@@ -1,0 +1,6 @@
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\bin\Release\Server.exe.config
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\bin\Release\Server.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\bin\Release\Server.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\obj\Release\Server.exe
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\obj\Release\Server.pdb
+C:\Users\tgood\Desktop\CodingProjects\ChatRoomProject\Server\obj\Release\Server.csprojResolveAssemblyReference.cache
