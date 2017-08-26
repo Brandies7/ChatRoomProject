@@ -17,7 +17,7 @@ namespace Server
         TcpListener server;
         private List<ThreadStart> clientThreadStarts = new List<ThreadStart>();
         private List<Thread> clientThreads = new List<Thread>();
-        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        Dictionary<string, Client> users = new Dictionary<string, Client>();
 
         public Server()
         {
@@ -63,6 +63,8 @@ namespace Server
                 // Create a client object.
                 client = new Client(stream, clientSocket);
 
+                AddUserToDictionary(client);
+
                 // Create a thread starter that uses the client.receive function
                 ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
 
@@ -72,6 +74,13 @@ namespace Server
                 // Start that thread. (We need resource locking?)
                 receiveMessageThread.Start(); 
             }
+        }
+
+        private void AddUserToDictionary(Client c)
+        {
+            users.Add(c.UserId, c);
+
+            throw new NotImplementedException();
         }
 
         // This is probably going to be what we use to broadcast messages. 

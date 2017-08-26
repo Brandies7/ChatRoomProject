@@ -17,12 +17,11 @@ namespace Server
         {
             stream = Stream;
             client = Client;
-            UserId = "495933b6-1762-47a1-b655-483510072e73";
+            UserId = Guid.NewGuid().ToString();
         }
 
         public void Send(string Message)
         {
-
             while (true)
             {
                 // Convert message to binary (1s and 0s)
@@ -31,10 +30,6 @@ namespace Server
                 // Send the message to the client.
                 stream.Write(message, 0, message.Count());
             }
-            
-
-
-
         }
 
         public void Receive()
@@ -52,7 +47,8 @@ namespace Server
                 string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);
 
                 // Write the input to the server log and then return.
-                Console.WriteLine(recievedMessageString);
+                Console.WriteLine(recievedMessageString.Trim());
+                // Send(recievedMessageString);
             }
         }
 
