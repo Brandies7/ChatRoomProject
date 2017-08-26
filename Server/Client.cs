@@ -25,17 +25,15 @@ namespace Server
 
             while (true)
             {
+                // Convert message to binary (1s and 0s)
                 byte[] message = Encoding.ASCII.GetBytes(Message);
+
+                // Send the message to the client.
                 stream.Write(message, 0, message.Count());
             }
             
 
-            // Convert message to binary (1s and 0s)
-            byte[] message = Encoding.ASCII.GetBytes(Message);
 
-            // Send the message to the client.
-            stream.Write(message, 0, message.Count());
-            stream.Close();
 
         }
 
@@ -43,14 +41,6 @@ namespace Server
         {
             while (true)
             {
-                byte[] recievedMessage = new byte[256];
-                stream.Read(recievedMessage, 0, recievedMessage.Length);
-                string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);
-                Console.WriteLine(recievedMessageString);
-                return recievedMessageString;
-            }
-        }
-
                 // Create a 256 byte array
                 byte[] recievedMessage = new byte[256];
 
@@ -65,5 +55,7 @@ namespace Server
                 Console.WriteLine(recievedMessageString);
             }
         }
+
+
     }
 }
