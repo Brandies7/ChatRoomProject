@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    
-    class Server:IObserver
+    class Server 
     {
         public static Client client;
         TcpListener server;
@@ -22,59 +21,41 @@ namespace Server
 
         public Server()
         {
-
-            
-
             // We want to listten on an address and a port.(We are listening for anything to be sent to us).
             server = new TcpListener(IPAddress.Parse("127.0.0.1"), 9999);
 
             // Let's start listening
-
             server.Start();
         }
+
         public void Run()
         {
             while (true)
             {
-                
-            
-            AcceptClient();
-            // Continuously accept clients.
-            ThreadStart acceptClientStart = new ThreadStart(AcceptClient);
-            Thread acceptClientThread = new Thread(AcceptClient);
-            acceptClientThread.Start();
+                AcceptClient();
+                // Continuously accept clients.
+                ThreadStart acceptClientStart = new ThreadStart(AcceptClient);
+                Thread acceptClientThread = new Thread(AcceptClient);
+                acceptClientThread.Start();
 
-            // Continuously look for messages to receive.
-            ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
-            Thread receiveMessageThread = new Thread(receiveMessageStart);
-            receiveMessageThread.Start();
-            { 
+                // Continuously look for messages to receive.
+                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
+                Thread receiveMessageThread = new Thread(receiveMessageStart);
+                receiveMessageThread.Start();
 
-
-
-
-            //            if (message.Length > 0)
-            //                Respond(message);
-
-
-
+                //            if (message.Length > 0)
+                //                Respond(message);
+            }
         }
+
         public void AcceptClient()
         {
-
-            TcpClient clientSocket = default(TcpClient);
-            clientSocket = server.AcceptTcpClient();
-            Console.WriteLine("Connected");
-            NetworkStream stream = clientSocket.GetStream();
-            client = new Client(stream, clientSocket);
-            
-
             while (true)
             {
                 // Create a client that is requesting to connect (Client called GetStream());
                 TcpClient clientSocket = server.AcceptTcpClient();
                 Console.WriteLine("Connected a new client");
-                dictionary.Add(UserID, clientSocket);
+                // dictionary.Add(UserID, clientSocket);
 
                 // Determine what stream the client is using
                 NetworkStream stream = clientSocket.GetStream();
@@ -82,20 +63,23 @@ namespace Server
                 // Create a client object.
                 client = new Client(stream, clientSocket);
 
-                ThreadStart receiveMessageStart = new ThreadStart(client.Receive); // Create a thread starter that uses the client.receive function
-                Thread receiveMessageThread = new Thread(receiveMessageStart); // Create a thread that calls client.receive()
-                receiveMessageThread.Start(); // Start that thread. (We need resource locking?)
-            }
+                // Create a thread starter that uses the client.receive function
+                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
 
+                // Create a thread that calls client.receive()
+                Thread receiveMessageThread = new Thread(receiveMessageStart);
+
+                // Start that thread. (We need resource locking?)
+                receiveMessageThread.Start(); 
+            }
         }
 
         // This is probably going to be what we use to broadcast messages. 
-        public void SendToAll(string body)
+        public void Response(string body)
         {
-            foreach (DictionaryEntry item in dictionary)
-            {
-                
-            }
+//            foreach (DictionaryEntry item in dictionary)
+//            {
+//            }
         }
     }
 }
