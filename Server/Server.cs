@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Server 
+    class Server
     {
         public static Client client;
         TcpListener server;
-        private List<ThreadStart> clientThreadStarts = new List<ThreadStart>();
-        private List<Thread> clientThreads = new List<Thread>();
-        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        private static Dictionary<string, Client> users = new Dictionary<string, Client>();
+        private static Dictionary<string, Thread> receiveThread = new Dictionary<string, Thread>();
+
 
         public Server()
         {
@@ -30,22 +30,12 @@ namespace Server
 
         public void Run()
         {
-            while (true)
-            {
-                AcceptClient();
-                // Continuously accept clients.
-                ThreadStart acceptClientStart = new ThreadStart(AcceptClient);
-                Thread acceptClientThread = new Thread(AcceptClient);
-                acceptClientThread.Start();
+            // Continuously accept clients.
+            ThreadStart acceptClientStart = new ThreadStart(AcceptClient);
+            Thread acceptClientThread = new Thread(AcceptClient);
+            acceptClientThread.Start();
 
-                // Continuously look for messages to receive.
-                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
-                Thread receiveMessageThread = new Thread(receiveMessageStart);
-                receiveMessageThread.Start();
-
-                //            if (message.Length > 0)
-                //                Respond(message);
-            }
+            while (true);
         }
 
         public void AcceptClient()
@@ -62,24 +52,32 @@ namespace Server
 
                 // Create a client object.
                 client = new Client(stream, clientSocket);
-
-                // Create a thread starter that uses the client.receive function
-                ThreadStart receiveMessageStart = new ThreadStart(client.Receive);
-
-                // Create a thread that calls client.receive()
-                Thread receiveMessageThread = new Thread(receiveMessageStart);
-
-                // Start that thread. (We need resource locking?)
-                receiveMessageThread.Start(); 
+                AddUserToDictionary(client);
             }
         }
 
-        // This is probably going to be what we use to broadcast messages. 
-        public void Response(string body)
+        private void AddUserToDictionary(Client newClient)
         {
-//            foreach (DictionaryEntry item in dictionary)
-//            {
-//            }
+            // Add user to dictionary of clients
+            users.Add(newClient.UserId, newClient);
+
+            // Create a thread for that new user
+            receiveThread.Add(newClient.UserId, new Thread(new ThreadStart(users[newClient.UserId].Receive)));
+
+            // Start that new users thread
+            receiveThread[newClient.UserId].Start();
+        }
+
+        // This is probably going to be what we use to broadcast messages. 
+        public static  void Response(Message message)
+        {
+            // Send the message to all users who aren't the sender
+            // "If I send the message hey, I don't want it to send it back to me"
+            foreach (KeyValuePair<string, Client> item in users)
+            {
+                if (item.Key == message.UserId) continue;
+                item.Value.Send(message.Body);
+            }
         }
     }
 }

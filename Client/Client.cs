@@ -12,6 +12,7 @@ namespace Client
     {
         TcpClient clientSocket;
         NetworkStream stream;
+        private String name;
 
         public Client(string IP, int port)
         {
@@ -23,6 +24,10 @@ namespace Client
 
             // Open a stream connection between client and server.
             stream = clientSocket.GetStream();
+
+            Console.WriteLine("What's your name?");
+            name = Console.ReadLine();
+
         }
 
         public void Send()
@@ -30,7 +35,7 @@ namespace Client
             while (true)
             {
                 // Get a message.
-                string messageString = UI.GetInput();
+                string messageString = name + ": " + UI.GetInput();
 
                 // Convert the message to bytes (1s and 0s).
                 byte[] message = Encoding.ASCII.GetBytes(messageString);
@@ -46,13 +51,15 @@ namespace Client
             while (true)
             {
                 // Creating a byte array with length 256.
-                byte[] recievedMessage = new byte[256];
+                byte[] receivedMessage = new byte[256];
 
                 // Reads 256 bytes of any message being received.
-                stream.Read(recievedMessage, 0, recievedMessage.Length);
+                stream.Read(receivedMessage, 0, receivedMessage.Length);
+
+                string receivedMessageString = Encoding.ASCII.GetString(receivedMessage);
 
                 // Displays the message received into the console.
-                UI.DisplayMessage(Encoding.ASCII.GetString(recievedMessage));
+                UI.DisplayMessage(receivedMessageString.Trim());
             }
         }
     }
