@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public static class UI
+    public class UI
     {
+        
         public static void DisplayMessage(string message)
         {
             Console.WriteLine(message);

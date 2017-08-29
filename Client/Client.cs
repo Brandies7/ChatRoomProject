@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +13,11 @@ namespace Client
     {
         TcpClient clientSocket;
         NetworkStream stream;
-        private String name;
+        public String name;
 
         public Client(string IP, int port)
         {
+            
             // Instantiating a TcpClient
             clientSocket = new TcpClient();
 
@@ -27,13 +29,16 @@ namespace Client
 
             Console.WriteLine("What's your name?");
             name = Console.ReadLine();
+            
 
         }
 
         public void Send()
         {
+            
             while (true)
             {
+                
                 // Get a message.
                 string messageString = name + ": " + UI.GetInput();
 
