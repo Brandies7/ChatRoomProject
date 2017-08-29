@@ -103,7 +103,15 @@ namespace Server
             // "If I send the message hey, I don't want it to send it back to me"
             foreach (KeyValuePair<string, Client> item in users)
             {
-                if (item.Key == message.UserId) continue;
+                try
+                {
+                    if (item.Key == message.UserId) continue;
+                }
+
+                catch
+                {
+                    
+                }
                 try
                 {
                     item.Value.Send(message.Body);
