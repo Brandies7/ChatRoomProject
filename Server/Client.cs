@@ -12,12 +12,16 @@ namespace Server
         NetworkStream stream;
         TcpClient client;
         public string UserId;
+        public Queue<string> Queue;
+        private Server server;
 
-        public Client(NetworkStream Stream, TcpClient Client)
+        public Client(NetworkStream Stream, TcpClient Client, Server server)
         {
             stream = Stream;
             client = Client;
             UserId = Guid.NewGuid().ToString();
+            Queue = new Queue<string>();
+            this.server = server;
         }
 
         public void Send(string Message)
@@ -26,30 +30,47 @@ namespace Server
                 byte[] message = Encoding.ASCII.GetBytes(Message);
 
                 // Send the message to the client.
+            try
+            {
                 stream.Write(message, 0, message.Count());
+            }
+            catch
+            {
+                Console.WriteLine("Send error");
+            }
         }
 
 
-        public void Receive()
+        public Message Receive()
         {
-            while (true)
-            {
                 // Create a 256 byte array
                 byte[] recievedMessage = new byte[256];
-
-                // Read up to 256 bytes from the input
+            try
+            {
                 stream.Read(recievedMessage, 0, recievedMessage.Length);
+            }
+            catch (Exception e)
+            {
+               Message message = new Message(this, "Has logged out");
+                server.queue.Enqueue(message);
+            }
+                // Read up to 256 bytes from the input
+               
 
                 // Convert the input as a string
                 string recievedMessageString = Encoding.ASCII.GetString(recievedMessage);
 
+
+
                 // Write the input to the server log and then return.
                 Console.WriteLine(recievedMessageString.Trim());
 
+
                 Message myMessage = new Message(this, recievedMessageString);
-                Server.Response(myMessage);
-                // Send(recievedMessageString);
-            }
+                //Server.Response(myMessage);
+                return myMessage;
+             // Send(recievedMessageString);
+
         }
 
 
